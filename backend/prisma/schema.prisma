@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                           String         @id @default(cuid())
+  email                        String         @unique
+  password                     String?
+  companyName                  String?
+  mobileNumber                 String?
+  companyAddress               String?
+  city                         String?
+  state                        String?
+  pinCode                      String?
+  country                      String?
+  gstNumber                    String?
+  isBlocked                    Boolean        @default(false)
+  otp                          String?
+  otpExpiresAt                 DateTime?
+  forgetPasswordToken          String?
+  forgetPasswordTokenExpiresAt DateTime?
+  forgetPasswordAttempt        Int            @default(0)
+  forgetPasswordLastAttempt    DateTime?
+  createdAt                    DateTime       @default(now())
+  updatedAt                    DateTime       @updatedAt
+  sheets                       Sheets[]
+  issues                       IssueDetails[]
+}
+
+enum SheetType {
+  MARBLE
+  GRANITE
+}
+
+enum SheetSIUnit {
+  INCH
+  FEET
+  METER
+  CENTIMETER
+}
+
+model Sheets {
+  sheetId      String   @id
+  userId       String
+  sheetName    String
+  customerName String
+  vehicleNo    String?
+  lotNo        String?
+  image        String?
+  date         DateTime
+
+  baseUnit SheetSIUnit  @default(FEET)
+  areaUnit SheetSIUnit?
+
+  sheetType SheetType
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+  entries   SheetEntries[]
+  user      User           @relation(fields: [userId], references: [id])
+}
+
+model SheetEntries {
+  entryId   String   @id
+  sheetId   String
+  len       Float
+  width     Float
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  sheet     Sheets   @relation(fields: [sheetId], references: [sheetId])
+}
+
+model IssueDetails {
+  id        String   @id @default(cuid())
+  userId    String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "companyName" DROP NOT NULL,
+ALTER COLUMN "mobileNumber" DROP NOT NULL,
+ALTER COLUMN "companyAddress" DROP NOT NULL,
+ALTER COLUMN "companyEmail" DROP NOT NULL;
