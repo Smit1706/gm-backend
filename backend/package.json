@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build":"tsc -b",
     "start": "node ./dist/src/index.js",
     "dev": "tsc -b && node ./dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/adapter-pg": "^7.1.0",
-    "@prisma/client": "^7.1.0",
+    "@prisma/client": "^7.4.0",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
@@ -28,10 +29,11 @@
     "multer": "^2.0.2",
     "nodemailer": "^7.0.11",
     "nodemon": "^3.1.11",
-    "pg": "^8.16.3",
-    "prisma": "^7.1.0"
+    "pg": "^8.16.3"
   },
   "devDependencies": {
-    "@types/pg": "^8.15.6"
+    "@types/pg": "^8.15.6",
+    "prisma": "^7.4.0",
+    "typescript": "^5.9.3"
   }
 }
