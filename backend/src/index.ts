@@ -8,6 +8,8 @@ import { authMiddleware } from "./middleware/auth.middleware.js";
 import { client } from "./config/db.js";
 import { sendMail } from "./config/mail.js";
 
+
+//deployment CI/CD
 const app = express();
 const PORT = 3000;
 
